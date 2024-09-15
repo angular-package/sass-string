@@ -1,0 +1,12 @@
+.idea/
+node_modules/
+yarn.lock
+package-lock.json
+.*
+!.csscomb.json
+!.gitignore
+!.gitattributes
+!.hound.yml
+!.scss-lint.yml
+!.stylelintrc.json
+temp
