@@ -3,4 +3,8 @@
 // @use "./src/lib/spec";
 // @use "../sass-string";
 
+// Distribution: works.
+// @use "../../dist/sass-string";
+
 // @debug sass-string.ends-with("primary dark", dark); // true
+
