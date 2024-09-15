@@ -1,0 +1,108 @@
+// Sass.
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
+
+// Functions.
+@use 'string.index.function' as string-index;
+@use 'string.unquote.function' as string-unquote;
+
+// Completed
+// The `string.split()` function returns comma-separated list of substrings of `$string` that are separated by `$separator`.
+// The separators aren’t included in these substrings..
+// If `$limit` is a number `1` or higher, this splits on at most that many $separators (and so returns at most $limit + 1 strings).
+// The last substring contains the rest of the string, including any remaining separators.
+// @param `$string` The `string` that is split by `$separator`.
+// @param `$separator` The separator that splits the `$string` into the returned list.
+// @param `$limit` Limit split of `$string`.
+// @param `$bracketed` Returns bracketed list.
+// @param `$unquote` Whether to unquote returned elements of list.
+// @returns The returned value is a list separated by `$separator` limited by `$limit` times, and/or is `$bracketed`.
+@function split(
+  $string,
+  $separator,
+  $limit: null,
+  $bracketed: false,
+  $unquote: false
+) {
+  @if not (meta.type-of($string) == string) {
+    @error "$string: #{$string} is not string";
+  }
+  $result: list.join((), (), comma, $bracketed);
+  $index: 0;
+  $i: 1;
+  @while not ($index == null) {
+    // Set `$index` to `null` to finish loop by default.
+    $index: null;
+  
+    // Separator index in 
+    $separator-index: null;
+  
+    // Find indexes of `$separator` in `$string`.
+    $separators: string-index.index($string, $separator...);
+
+    $-separators: ();
+    @each $separator in $separators {
+      @if $separator {
+        $-separators: list.append($-separators, $separator);
+      }
+    }
+    $separators: $-separators;
+
+    @if list.length($separators) > 0 {
+      $index: math.min($separators...);
+      $separator-index: list.index($separators, $index);  
+    }
+
+    @if $separator-index {
+      $result: list.append(
+        $result,
+        string-unquote.unquote(
+          string.slice($string, 1, $index - 1),
+          $unquote
+        )
+      );
+      @if $limit and $limit == $i {
+        $result: list.append(
+          $result,
+          string-unquote.unquote(
+            string.slice($string, $index + string.length(list.nth($separator, $separator-index)), -1),
+            $unquote
+          )
+        );
+        $index: null;
+      } @else {
+        $string: string.slice(
+          $string,
+          $index + string.length(list.nth($separator, $separator-index))
+        );
+      }
+    } @else {
+      $result: list.append(
+        $result,
+        string-unquote.unquote($string, $unquote)
+      );
+    }
+
+    $i: $i + 1;
+  }
+  @return $result;
+}
+
+// Examples.
+// single character
+// @debug split('aaa bbb ccc', ' '); // "aaa", "bbb", "ccc"
+// @debug split('aaa-bbb-ccc', '-'); // "aaa", "bbb", "ccc"
+// @debug split('aaa/bbb/ccc', '/'); // "aaa", "bbb", "ccc"
+// @debug split("Segoe UI Emoji", " "); // "Segoe", "UI", "Emoji"
+// @debug split("Segoe UI Emoji", " ", $limit: 1); // "Segoe", "UI Emoji"
+// @debug split("Segoe UI Emoji", " ", $limit: 1, $bracketed: true); // ["Segoe", "UI Emoji"]
+// @debug split("SF Mono Segoe UI Mono Roboto Mono", " ", $limit: 2, $bracketed: true); // ["SF", "Mono", "Segoe UI Mono Roboto Mono"]
+
+// word `$separator`
+// @debug split('aaa_DELIMITER_bbb_DELIMITER_ccc', '_DELIMITER_'); // "aaa", "bbb", "ccc"
+// @debug split('aaa[separator]bbb[separator]ccc', '[separator]'); // "aaa", "bbb", "ccc"
+
+// multiple separators
+// @debug split('aaa_SEPARATOR_bbb_DELIMITER_ccc_ADD_eee_SEPARATOR_ddd', ('_DELIMITER_', '_SEPARATOR_', '_ADD_')); // "aaa", "bbb", "ccc", "eee", "ddd"
