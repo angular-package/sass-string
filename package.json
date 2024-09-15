@@ -2,7 +2,7 @@
   "name": "@angular-package/sass-string",
   "version": "1.0.0-beta",
   "author": "@angular-package <contact@angular-package.dev>",
-  "homepage": "https://angular-package.github.io/spectre.css",
+  "homepage": "https://angular-package.github.io/sass-string",
   "description": "Modified string Sass module.",
   "main": "./index.scss",
   "license": "MIT",
@@ -22,7 +22,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular-package/sass-string"
+    "url": "git+https://github.com/angular-package/sass-string.git"
   },
   "bugs": {
     "url": "https://github.com/angular-package/sass-string/issues"
