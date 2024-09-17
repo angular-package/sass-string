@@ -187,9 +187,9 @@ MIT © angular-package ([license][sass-string-license])
 
 <!-- Package: sass-string -->
   <!-- npm -->
-  [sass-string-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fsass-string.svg
-  [sass-string-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fsass-string.png
-  [sass-string-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fsass-string
+  [sass-string-npm-badge-svg]: https://badge.fury.io/js/@angular-package%2Fsass-string.svg
+  [sass-string-npm-badge-png]: https://badge.fury.io/js/@angular-package%2Fsass-string.png
+  [sass-string-npm-badge]: https://badge.fury.io/js/@angular-package%2Fsass-string
   [sass-string-npm-readme]: https://www.npmjs.com/package/@angular-package/sass-string#readme
 
   <!-- GitHub -->
