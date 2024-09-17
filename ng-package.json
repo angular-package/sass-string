@@ -7,5 +7,6 @@
   "assets": [
     "./src/lib/**/*.scss",
     "*.scss"
-  ]
+  ],
+  "keepLifecycleScripts": true
 }
