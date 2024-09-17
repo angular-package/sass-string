@@ -1,6 +1,6 @@
 {
   "name": "@angular-package/sass-string",
-  "version": "1.0.1-beta",
+  "version": "1.0.2-beta",
   "author": "@angular-package <contact@angular-package.dev>",
   "homepage": "https://angular-package.github.io/sass-string",
   "description": "Modified string Sass module.",
