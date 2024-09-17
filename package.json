@@ -8,7 +8,7 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
     "stylelint": "^15.10.3",
@@ -19,7 +19,12 @@
   "peerDependencies": {
     "sass": "^1.78.0"
   },
-  "scripts": {},
+  "scripts": {
+    "prepublishOnly": "npm install rimraf && npm run pkg && npm run clean",
+    "pkg": "npm pkg delete module es2020 esm2020 fesm2020 fesm2015 typings exports dependencies",
+    "clean": "./node_modules/rimraf/dist/esm/bin.mjs ./esm2020 ./fesm2015 ./fesm2020 ./index.d.ts ./public-api.d.ts ./node_modules",
+    "sass": "./node_modules/sass/sass.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/angular-package/sass-string.git"
